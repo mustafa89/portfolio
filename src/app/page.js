@@ -1,103 +1,69 @@
-import Image from "next/image";
+'use client'
+
+import Navbar from "./components/navbar";
+import { Button } from '@headlessui/react';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
+      {/* Background gradient effect */}
+      <div className="absolute top-[-50%] left-[-10%] w-[70%] h-[100%] bg-[#5E6AD2] opacity-[0.03] blur-[150px] rounded-full z-0"></div>
+      <div className="absolute bottom-[-30%] right-[-5%] w-[50%] h-[80%] bg-[#8A94E5] opacity-[0.03] blur-[150px] rounded-full z-0"></div>
+      
+      <Navbar />
+      <main className="container mx-auto px-4 py-24 md:py-32 flex flex-col items-center relative z-10">
+        <h1 className="text-5xl md:text-6xl font-bold text-[#ededed] mb-8 tracking-tight text-center max-w-3xl animate-fade-in">
+          <span className="linear-gradient-text">Site Reliability Engineer</span> passionate about infrastructure
+        </h1>
+        <p className="text-xl text-[#a9a9a9] max-w-2xl text-center mb-12 leading-relaxed animate-fade-in" style={{animationDelay: "0.1s"}}>
+          I'm a Site Reliability Engineer passionate about all things cloud and infrastructure. 
+          Feel free to explore my profile, projects and CV.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{animationDelay: "0.2s"}}>
+          <Button
+            as={Link}
+            href="/about"
+            className="px-6 py-3 linear-button rounded-md text-sm font-medium button-press"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            View My CV
+          </Button>
+          <Button
+            as={Link}
+            href="/projects"
+            className="px-6 py-3 linear-button-secondary rounded-md text-sm font-medium button-press"
           >
-            Read our docs
-          </a>
+            Browse Projects
+          </Button>
+        </div>
+        
+        <div className="mt-32 w-full max-w-5xl">
+          <div className="text-center mb-12 animate-fade-in" style={{animationDelay: "0.3s"}}>
+            <h2 className="text-3xl font-bold mb-2 tracking-tight text-[#ededed]">Featured Skills</h2>
+            <p className="text-[#a9a9a9]">Areas where I excel and technologies I'm proficient with</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="glass-card p-6 rounded-lg stagger-item animate-slide-up opacity-0 transform transition-all duration-500 ease-out hover:translate-y-[-8px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] hover:bg-[#151515]/80 hover:border-[#232323] relative overflow-hidden group">
+              <div className="card-shimmer"></div>
+              <h3 className="text-lg font-semibold mb-3 text-[#ededed] relative z-10 transition-all duration-300 group-hover:text-white">Cloud Infrastructure</h3>
+              <p className="text-[#a9a9a9] relative z-10 transition-all duration-300 group-hover:text-[#d1d1d1]">Expertise in AWS, GCP, and Azure with deep knowledge of cloud architecture patterns and best practices.</p>
+            </div>
+            
+            <div className="glass-card p-6 rounded-lg stagger-item animate-slide-up opacity-0 transform transition-all duration-500 ease-out hover:translate-y-[-8px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] hover:bg-[#151515]/80 hover:border-[#232323] relative overflow-hidden group">
+              <div className="card-shimmer" style={{animationDelay: "0.1s"}}></div>
+              <h3 className="text-lg font-semibold mb-3 text-[#ededed] relative z-10 transition-all duration-300 group-hover:text-white">DevOps & Automation</h3>
+              <p className="text-[#a9a9a9] relative z-10 transition-all duration-300 group-hover:text-[#d1d1d1]">Building CI/CD pipelines, infrastructure as code, and automation solutions that enable teams to ship faster.</p>
+            </div>
+            
+            <div className="glass-card p-6 rounded-lg stagger-item animate-slide-up opacity-0 transform transition-all duration-500 ease-out hover:translate-y-[-8px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] hover:bg-[#151515]/80 hover:border-[#232323] relative overflow-hidden group">
+              <div className="card-shimmer" style={{animationDelay: "0.2s"}}></div>
+              <h3 className="text-lg font-semibold mb-3 text-[#ededed] relative z-10 transition-all duration-300 group-hover:text-white">Monitoring & Observability</h3>
+              <p className="text-[#a9a9a9] relative z-10 transition-all duration-300 group-hover:text-[#d1d1d1]">Implementing robust monitoring solutions with tools like Prometheus, Grafana, and distributed tracing systems.</p>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
