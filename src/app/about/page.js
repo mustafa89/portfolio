@@ -394,38 +394,23 @@ export default function AboutPage() {
               <h2 className="text-lg font-semibold text-[#ededed]">Contact Information</h2>
             </div>
             <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <div className="mb-3">
-                  <div className="flex items-center gap-2 skill-logo-container">
-                    <img src={contactInfo.email.logo} alt="Email logo" className="skill-logo" />
-                    <span className="font-medium text-[#ededed]">{contactInfo.email.label}:</span> 
-                    <a href={contactInfo.email.href} className="text-[#5E6AD2] hover:text-[#6c77d8] transition-colors">{contactInfo.email.value}</a>
+              {Object.keys(contactInfo).map((key, index) => {
+                const contact = contactInfo[key];
+                const staggerDelay = 0.15 + (index * 0.1);
+                return (
+                  <div key={key} className="mb-3 skill-item" style={{animationDelay: `${staggerDelay}s`}}>
+                    <div className="flex items-center gap-2 skill-logo-container">
+                      <img src={contact.logo} alt={`${contact.label} logo`} className="skill-logo" />
+                      <span className="font-medium text-[#ededed]">{contact.label}:</span> 
+                      {contact.href ? (
+                        <a href={contact.href} target="_blank" rel="noopener noreferrer" className="text-[#5E6AD2] hover:text-[#6c77d8] transition-colors">{contact.value}</a>
+                      ) : (
+                        <span className="text-[#a9a9a9]">{contact.value}</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center gap-2 skill-logo-container">
-                    <img src={contactInfo.location.logo} alt="Location logo" className="skill-logo" />
-                    <span className="font-medium text-[#ededed]">{contactInfo.location.label}:</span> 
-                    <span className="text-[#a9a9a9]">{contactInfo.location.value}</span>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="mb-3">
-                  <div className="flex items-center gap-2 skill-logo-container">
-                    <img src={contactInfo.linkedin.logo} alt="LinkedIn logo" className="skill-logo" />
-                    <span className="font-medium text-[#ededed]">{contactInfo.linkedin.label}:</span> 
-                    <a href={contactInfo.linkedin.href} target="_blank" rel="noopener noreferrer" className="text-[#5E6AD2] hover:text-[#6c77d8] transition-colors">{contactInfo.linkedin.value}</a>
-                  </div>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center gap-2 skill-logo-container">
-                    <img src={contactInfo.github.logo} alt="GitHub logo" className="skill-logo" />
-                    <span className="font-medium text-[#ededed]">{contactInfo.github.label}:</span> 
-                    <a href={contactInfo.github.href} target="_blank" rel="noopener noreferrer" className="text-[#5E6AD2] hover:text-[#6c77d8] transition-colors">{contactInfo.github.value}</a>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
             
