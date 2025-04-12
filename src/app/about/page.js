@@ -314,6 +314,7 @@ export const educationData = {
   degree: "Bachelor of Electrical Engineering",
   institution: "Air University, Islamabad",
   period: "2011 - 2015",
+  logo: "https://www.svgrepo.com/show/277495/graduate-mortarboard.svg"
 };
 
 export default function AboutPage() {
@@ -498,10 +499,10 @@ export default function AboutPage() {
             </div>
             <div className="divide-y divide-[#232323]">
               {experienceData.map((experience, index) => (
-                <div key={index} className="p-6">
+                <div key={index} className="p-6 skill-item">
                   <div className="flex flex-col md:flex-row justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <img src={experience.logo} alt={`${experience.company} logo`} className="w-8 h-8 object-contain" />
+                    <div className="flex items-center gap-3 skill-logo-container">
+                      <img src={experience.logo} alt={`${experience.company} logo`} className="skill-logo" />
                       <div>
                         <h3 className="font-medium text-[#ededed]">{experience.title}</h3>
                         <p className="text-[#a9a9a9]">{experience.company}</p>
@@ -523,12 +524,15 @@ export default function AboutPage() {
             <div className="border-b border-[#232323] px-6 py-4">
               <h2 className="text-lg font-semibold text-[#ededed]">Education</h2>
             </div>
-            <div className="p-6">
+            <div className="p-6 skill-item">
               <div className="flex flex-col md:flex-row justify-between mb-2">
-                <h3 className="font-medium text-[#ededed]">{educationData.degree}</h3>
+                <div className="flex items-center gap-3 skill-logo-container">
+                  <img src={educationData.logo} alt="Education logo" className="skill-logo" />
+                  <h3 className="font-medium text-[#ededed]">{educationData.degree}</h3>
+                </div>
                 <span className="text-[#a9a9a9] text-sm">{educationData.period}</span>
               </div>
-              <p className="text-[#a9a9a9]">{educationData.institution}</p>
+              <p className="text-[#a9a9a9] ml-11">{educationData.institution}</p>
             </div>
           </div>
         </div>
