@@ -235,7 +235,7 @@ export const experienceData = [
     title: "Sr. Site Reliability Engineer",
     company: "Codility GmbH",
     period: "Dec 2021 - Present",
-    logo: "/C_yellow.svg",
+    logo: "https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_9a5381fe5eb65b99f6e151a7a30f9cf2/codility.png",
     responsibilities: [
       "Leading cloud infrastructure and reliability initiatives",
       "Implementing and managing Kubernetes environments",
@@ -377,7 +377,7 @@ export default function AboutPage() {
                 className="flex items-center gap-2 px-4 py-2 linear-button-secondary rounded-md text-sm font-medium button-press"
               >
                 <Image 
-                  src="/print-icon.svg" 
+                  src="https://www.svgrepo.com/show/474950/print.svg" 
                   alt="Print CV" 
                   width={20} 
                   height={20}
