@@ -17,7 +17,7 @@ export default function Home() {
           <span className="linear-gradient-text">Site Reliability Engineer</span> passionate about infrastructure
         </h1>
         <p className="text-xl text-[#a9a9a9] max-w-2xl text-center mb-12 leading-relaxed animate-fade-in" style={{animationDelay: "0.1s"}}>
-          I'm a Site Reliability Engineer passionate about all things cloud and infrastructure. 
+          I&apos;m a Site Reliability Engineer passionate about all things cloud and infrastructure. 
           Feel free to explore my profile, projects and CV.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{animationDelay: "0.2s"}}>
@@ -40,7 +40,7 @@ export default function Home() {
         <div className="mt-32 w-full max-w-5xl">
           <div className="text-center mb-12 animate-fade-in" style={{animationDelay: "0.3s"}}>
             <h2 className="text-3xl font-bold mb-2 tracking-tight text-[#ededed]">Featured Skills</h2>
-            <p className="text-[#a9a9a9]">Areas where I excel and technologies I'm proficient with</p>
+            <p className="text-[#a9a9a9]">Areas where I excel and technologies I&apos;m proficient with</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
