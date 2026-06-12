@@ -1,68 +1,105 @@
-'use client'
-
 import Navbar from "./components/navbar";
-import { Button } from '@headlessui/react';
-import Link from 'next/link';
+import Link from "next/link";
+import { capabilities, metrics, profile, projects } from "./data/portfolio";
 
 export default function Home() {
+  const featuredProjects = projects.slice(0, 3);
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden">
-      {/* Background gradient effect */}
-      <div className="absolute top-[-50%] left-[-10%] w-[70%] h-[100%] bg-[#5E6AD2] opacity-[0.03] blur-[150px] rounded-full z-0"></div>
-      <div className="absolute bottom-[-30%] right-[-5%] w-[50%] h-[80%] bg-[#8A94E5] opacity-[0.03] blur-[150px] rounded-full z-0"></div>
-      
+    <div className="site-shell min-h-screen overflow-x-hidden">
       <Navbar />
-      <main className="container mx-auto px-4 py-24 md:py-32 flex flex-col items-center relative z-10">
-        <h1 className="text-5xl md:text-6xl font-bold text-[#ededed] mb-8 tracking-tight text-center max-w-3xl animate-fade-in">
-          <span className="linear-gradient-text">Site Reliability Engineer</span> passionate about infrastructure
-        </h1>
-        <p className="text-xl text-[#a9a9a9] max-w-2xl text-center mb-12 leading-relaxed animate-fade-in" style={{animationDelay: "0.1s"}}>
-          I&apos;m a Site Reliability Engineer passionate about all things cloud and infrastructure. 
-          Feel free to explore my profile, projects and CV.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{animationDelay: "0.2s"}}>
-          <Button
-            as={Link}
-            href="/about"
-            className="px-6 py-3 linear-button rounded-md text-sm font-medium button-press"
-          >
-            View My CV
-          </Button>
-          <Button
-            as={Link}
-            href="/projects"
-            className="px-6 py-3 linear-button-secondary rounded-md text-sm font-medium button-press"
-          >
-            Browse Projects
-          </Button>
-        </div>
-        
-        <div className="mt-32 w-full max-w-5xl">
-          <div className="text-center mb-12 animate-fade-in" style={{animationDelay: "0.3s"}}>
-            <h2 className="text-3xl font-bold mb-2 tracking-tight text-[#ededed]">Featured Skills</h2>
-            <p className="text-[#a9a9a9]">Areas where I excel and technologies I&apos;m proficient with</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass-card p-6 rounded-lg stagger-item animate-slide-up opacity-0 transform transition-all duration-500 ease-out hover:translate-y-[-8px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] hover:bg-[#151515]/80 hover:border-[#232323] relative overflow-hidden group">
-              <div className="card-shimmer"></div>
-              <h3 className="text-lg font-semibold mb-3 text-[#ededed] relative z-10 transition-all duration-300 group-hover:text-white">Cloud Infrastructure</h3>
-              <p className="text-[#a9a9a9] relative z-10 transition-all duration-300 group-hover:text-[#d1d1d1]">Expertise in AWS, GCP, and Azure with deep knowledge of cloud architecture patterns and best practices.</p>
-            </div>
-            
-            <div className="glass-card p-6 rounded-lg stagger-item animate-slide-up opacity-0 transform transition-all duration-500 ease-out hover:translate-y-[-8px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] hover:bg-[#151515]/80 hover:border-[#232323] relative overflow-hidden group">
-              <div className="card-shimmer" style={{animationDelay: "0.1s"}}></div>
-              <h3 className="text-lg font-semibold mb-3 text-[#ededed] relative z-10 transition-all duration-300 group-hover:text-white">DevOps & Automation</h3>
-              <p className="text-[#a9a9a9] relative z-10 transition-all duration-300 group-hover:text-[#d1d1d1]">Building CI/CD pipelines, infrastructure as code, and automation solutions that enable teams to ship faster.</p>
-            </div>
-            
-            <div className="glass-card p-6 rounded-lg stagger-item animate-slide-up opacity-0 transform transition-all duration-500 ease-out hover:translate-y-[-8px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] hover:bg-[#151515]/80 hover:border-[#232323] relative overflow-hidden group">
-              <div className="card-shimmer" style={{animationDelay: "0.2s"}}></div>
-              <h3 className="text-lg font-semibold mb-3 text-[#ededed] relative z-10 transition-all duration-300 group-hover:text-white">Monitoring & Observability</h3>
-              <p className="text-[#a9a9a9] relative z-10 transition-all duration-300 group-hover:text-[#d1d1d1]">Implementing robust monitoring solutions with tools like Prometheus, Grafana, and distributed tracing systems.</p>
+      <main id="main-content" className="mx-auto max-w-7xl px-5 pb-24 pt-16 sm:pt-24 lg:px-8">
+        <section className="grid gap-10 lg:grid-cols-[1.06fr_0.94fr] lg:items-end" aria-labelledby="hero-title">
+          <div className="animate-rise">
+            <p className="kicker">Production Systems · Cloud Platforms · Calm Incidents</p>
+            <h1 id="hero-title" className="hero-title mt-5 max-w-5xl text-balance text-5xl font-black tracking-[-0.07em] text-emerald-50 sm:text-7xl lg:text-8xl">
+              SRE work with a bias for boring, resilient magic.
+            </h1>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+              {profile.summary}
+            </p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/projects" className="button-primary focus-ring">
+                Explore Selected Work
+              </Link>
+              <Link href="/cv" className="button-secondary focus-ring">
+                Open Printable CV
+              </Link>
             </div>
           </div>
-        </div>
+
+          <aside className="terminal-card animate-rise delay-150" aria-label="Reliability snapshot">
+            <div className="terminal-bar">
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+              <span className="ml-2 text-xs text-slate-400">status.mustafa.dev</span>
+            </div>
+            <div className="mt-6 space-y-5 font-mono text-sm text-emerald-100/85">
+              <p><span className="text-emerald-300">$</span> whoami</p>
+              <p className="pl-4 text-slate-300">{profile.title} · {profile.location}</p>
+              <p><span className="text-emerald-300">$</span> current_focus</p>
+              <ul className="space-y-2 pl-4 text-slate-300">
+                <li>→ reliable deployment paths</li>
+                <li>→ observable infrastructure</li>
+                <li>→ automation that deletes toil</li>
+              </ul>
+              <p><span className="text-emerald-300">$</span> incident_mode</p>
+              <p className="pl-4 text-slate-300">calm, curious, evidence-first</p>
+            </div>
+          </aside>
+        </section>
+
+        <section className="mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Career highlights">
+          {metrics.map((metric) => (
+            <div key={metric.label} className="metric-card">
+              <div className="text-4xl font-black tracking-[-0.06em] text-emerald-200">{metric.value}</div>
+              <div className="mt-2 text-sm uppercase tracking-[0.18em] text-slate-400">{metric.label}</div>
+            </div>
+          ))}
+        </section>
+
+        <section className="mt-24" aria-labelledby="capabilities-title">
+          <div className="section-heading">
+            <p className="kicker">What I Bring</p>
+            <h2 id="capabilities-title" className="section-title">The work behind the uptime graph.</h2>
+          </div>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {capabilities.map((capability) => (
+              <article key={capability.title} className="feature-card">
+                <p className="text-xs uppercase tracking-[0.28em] text-emerald-300/75">{capability.eyebrow}</p>
+                <h3 className="mt-4 text-2xl font-bold tracking-[-0.04em] text-emerald-50">{capability.title}</h3>
+                <p className="mt-4 leading-7 text-slate-300">{capability.description}</p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {capability.proof.map((item) => (
+                    <span key={item} className="chip">{item}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-24" aria-labelledby="work-title">
+          <div className="section-heading sm:flex sm:items-end sm:justify-between">
+            <div>
+              <p className="kicker">Selected Work</p>
+              <h2 id="work-title" className="section-title">Systems, not screenshots.</h2>
+            </div>
+            <Link href="/projects" className="text-link focus-ring mt-5 inline-flex sm:mt-0">
+              View All Projects →
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {featuredProjects.map((project) => (
+              <article key={project.title} className="project-card">
+                <p className="text-sm text-emerald-300">{project.type}</p>
+                <h3 className="mt-3 text-2xl font-bold tracking-[-0.04em] text-emerald-50">{project.title}</h3>
+                <p className="mt-4 leading-7 text-slate-300">{project.impact}</p>
+              </article>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
