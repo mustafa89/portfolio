@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import Link from "next/link";
 import SafeIcon from "../components/SafeIcon";
@@ -13,6 +13,16 @@ import {
 } from "../data/portfolio";
 
 export default function CVPage() {
+  // Auto-trigger print dialog when Print CV button is clicked
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Generate PDF download from the current page
+  const handleDownloadPDF = () => {
+    window.print();
+  };
+
   return (
     <div className="cv-page min-h-screen px-4 py-6 sm:px-6 lg:px-8">
       <div className="no-print mx-auto mb-6 flex max-w-5xl flex-wrap gap-3">
@@ -115,8 +125,8 @@ export default function CVPage() {
             </div>
             <p className="mt-1 text-neutral-400">{education.institution}</p>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </div>
+    </>
   );
-}
+} 

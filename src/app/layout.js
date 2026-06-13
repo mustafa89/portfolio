@@ -22,28 +22,8 @@ const newsreader = Newsreader({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://mustafa89.github.io"),
-  title: {
-    default: "Mustafa Mujahid — Site Reliability Engineer",
-    template: "%s — Mustafa Mujahid",
-  },
-  description:
-    "Portfolio of Mustafa Mujahid, a Senior Site Reliability Engineer focused on cloud infrastructure, observability, automation, and reliable delivery systems.",
-  openGraph: {
-    title: "Mustafa Mujahid — Site Reliability Engineer",
-    description:
-      "Cloud infrastructure, SRE, observability, automation, and platform engineering portfolio.",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
-
-export const viewport = {
-  themeColor: "#08110f",
-  colorScheme: "dark",
+  title: 'Mustafa Mujahid | Portfolio',
+  description: 'Personal portfolio showcasing skills, experience, and projects of Mustafa Mujahid',
 };
 
 export default function RootLayout({ children }) {
