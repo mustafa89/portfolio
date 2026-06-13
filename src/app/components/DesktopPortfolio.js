@@ -91,12 +91,9 @@ function WindowContent({ id }) {
   if (id === "projects") {
     return (
       <div className="space-y-4">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p className="desktop-kicker">projects.folder</p>
-            <h2 className="desktop-window-heading">Selected systems</h2>
-          </div>
-          <Link href="/projects" className="desktop-mini-link">full page →</Link>
+        <div>
+          <p className="desktop-kicker">projects.folder</p>
+          <h2 className="desktop-window-heading">Selected systems</h2>
         </div>
         <div className="desktop-project-grid">
           {projects.slice(0, 4).map((project) => (
