@@ -1,10 +1,11 @@
 'use client';
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { contactChannels, experience, profile, projects, toolsData, visualSkillGroups } from "../data/portfolio";
 
 const DESKTOP_APPS = [
+  { id: "browser", label: "netscape.www", icon: "🌐", side: "left" },
   { id: "home", label: "home.mdx", icon: "📄", side: "left" },
   { id: "profile", label: "profile.sys", icon: "🧑‍💻", side: "left" },
   { id: "projects", label: "projects", icon: "🗃️", side: "left" },
@@ -15,9 +16,10 @@ const DESKTOP_APPS = [
   { id: "trash", label: "trash", icon: "🗑️", side: "right" },
 ];
 
-const INITIAL_WINDOWS = ["home", "terminal"];
+const INITIAL_WINDOWS = ["browser", "terminal"];
 
 const WINDOW_META = {
+  browser: { title: "mustafa89.github.io — browser", className: "window-browser" },
   home: { title: "home.mdx", className: "window-home" },
   profile: { title: "profile.sys", className: "window-profile" },
   projects: { title: "projects.folder", className: "window-projects" },
@@ -37,6 +39,22 @@ function getClock() {
 }
 
 function WindowContent({ id }) {
+  if (id === "browser") {
+    return (
+      <div className="desktop-browser">
+        <div className="desktop-browser-chrome">
+          <span className="desktop-browser-nav" aria-hidden="true">⟨</span>
+          <span className="desktop-browser-nav" aria-hidden="true">⟩</span>
+          <span className="desktop-browser-nav" aria-hidden="true">⟳</span>
+          <span className="desktop-browser-url" aria-hidden="true">https://mustafa89.github.io/site</span>
+          {/* relative href so it resolves under the GitHub Pages basePath too */}
+          <a href="site/" className="desktop-browser-pop" aria-label="Open website full screen">⤢</a>
+        </div>
+        <iframe src="site/" title="Portfolio website" className="desktop-browser-frame" />
+      </div>
+    );
+  }
+
   if (id === "home") {
     return (
       <div className="space-y-5">
@@ -103,8 +121,11 @@ function WindowContent({ id }) {
           <span>{profile.title}</span>
           <small>{profile.location}</small>
         </div>
-        <p className="desktop-body-copy">The detailed CV keeps the visual skill bars and icon wall intact.</p>
-        <Link href="/cv" className="desktop-button desktop-button-dark">Open CV page</Link>
+        <p className="desktop-body-copy">Two editions: the original with skill bars and icons, and a lean hiring-manager cut.</p>
+        <div className="desktop-actions">
+          <Link href="/cv" className="desktop-button desktop-button-dark">Open CV page</Link>
+          <Link href="/cv_2" className="desktop-button">Open CV 2.0</Link>
+        </div>
       </div>
     );
   }
@@ -126,7 +147,7 @@ function WindowContent({ id }) {
     return (
       <div className="space-y-5">
         <p className="desktop-kicker">skills.exe</p>
-        <h2 className="desktop-window-heading">Skill bars restored</h2>
+        <h2 className="desktop-window-heading">Toolchain</h2>
         {visualSkillGroups.map((group) => (
           <div key={group.title} className="desktop-skill-group">
             <h3>{group.title}</h3>
@@ -169,11 +190,84 @@ function WindowContent({ id }) {
   );
 }
 
+const MIN_W = 280;
+const MIN_H = 200;
+
 export default function DesktopPortfolio() {
   const [openWindows, setOpenWindows] = useState(INITIAL_WINDOWS);
-  const [activeWindow, setActiveWindow] = useState("home");
+  const [activeWindow, setActiveWindow] = useState("browser");
   const [minimizedWindows, setMinimizedWindows] = useState([]);
-  const clock = useMemo(getClock, []);
+  const [clock, setClock] = useState("");
+  const [geometry, setGeometry] = useState({});
+  const stageRef = useRef(null);
+  const dragRef = useRef(null);
+
+  useEffect(() => {
+    setClock(getClock());
+    const timer = setInterval(() => setClock(getClock()), 30_000);
+    return () => clearInterval(timer);
+  }, []);
+
+  function beginDrag(event, id, kind) {
+    if (event.button !== undefined && event.button !== 0) return;
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 900px)").matches) return;
+    if (event.target.closest("button, a")) return;
+
+    const stage = stageRef.current;
+    const winEl = event.currentTarget.closest(".desktop-window");
+    if (!stage || !winEl) return;
+
+    const stageRect = stage.getBoundingClientRect();
+    const winRect = winEl.getBoundingClientRect();
+    const startGeom = geometry[id] ?? {
+      x: winRect.left - stageRect.left,
+      y: winRect.top - stageRect.top,
+      w: winRect.width,
+      h: winRect.height,
+    };
+
+    dragRef.current = {
+      id,
+      kind,
+      startX: event.clientX,
+      startY: event.clientY,
+      startGeom,
+      stageW: stageRect.width,
+      stageH: stageRect.height,
+      pointerId: event.pointerId,
+      el: event.currentTarget,
+    };
+
+    setActiveWindow(id);
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    event.preventDefault();
+  }
+
+  function onDragMove(event) {
+    const d = dragRef.current;
+    if (!d) return;
+    const dx = event.clientX - d.startX;
+    const dy = event.clientY - d.startY;
+
+    if (d.kind === "move") {
+      const x = Math.max(0, Math.min(d.stageW - d.startGeom.w, d.startGeom.x + dx));
+      const y = Math.max(0, Math.min(d.stageH - d.startGeom.h, d.startGeom.y + dy));
+      setGeometry((g) => ({ ...g, [d.id]: { ...d.startGeom, x, y } }));
+    } else {
+      const w = Math.max(MIN_W, Math.min(d.stageW - d.startGeom.x, d.startGeom.w + dx));
+      const h = Math.max(MIN_H, Math.min(d.stageH - d.startGeom.y, d.startGeom.h + dy));
+      setGeometry((g) => ({ ...g, [d.id]: { ...d.startGeom, w, h } }));
+    }
+  }
+
+  function endDrag(event) {
+    const d = dragRef.current;
+    if (!d) return;
+    try {
+      d.el.releasePointerCapture?.(event.pointerId ?? d.pointerId);
+    } catch {}
+    dragRef.current = null;
+  }
 
   function openApp(id) {
     setOpenWindows((current) => (current.includes(id) ? current : [...current, id]));
@@ -194,7 +288,8 @@ export default function DesktopPortfolio() {
   function resetDesktop() {
     setOpenWindows(INITIAL_WINDOWS);
     setMinimizedWindows([]);
-    setActiveWindow("home");
+    setActiveWindow("browser");
+    setGeometry({});
   }
 
   return (
@@ -232,7 +327,7 @@ export default function DesktopPortfolio() {
         ))}
       </section>
 
-      <div className="desktop-window-stage" aria-live="polite">
+      <div className="desktop-window-stage" aria-live="polite" ref={stageRef}>
         {openWindows.map((id, index) => {
           const meta = WINDOW_META[id];
           const isActive = activeWindow === id;
@@ -240,15 +335,32 @@ export default function DesktopPortfolio() {
 
           if (isMinimized) return null;
 
+          const geom = geometry[id];
+          const style = { zIndex: isActive ? 20 : 8 + index };
+          if (geom) {
+            style.left = geom.x;
+            style.top = geom.y;
+            style.right = "auto";
+            style.bottom = "auto";
+            style.width = geom.w;
+            style.height = geom.h;
+          }
+
           return (
             <section
               key={id}
-              className={`desktop-window ${meta.className} ${isActive ? "is-active" : ""}`}
-              style={{ zIndex: isActive ? 20 : 8 + index }}
+              className={`desktop-window ${meta.className} ${isActive ? "is-active" : ""} ${geom ? "has-geometry" : ""}`}
+              style={style}
               aria-labelledby={`${id}-window-title`}
               onMouseDown={() => setActiveWindow(id)}
             >
-              <div className="desktop-title-bar">
+              <div
+                className="desktop-title-bar"
+                onPointerDown={(e) => beginDrag(e, id, "move")}
+                onPointerMove={onDragMove}
+                onPointerUp={endDrag}
+                onPointerCancel={endDrag}
+              >
                 <span id={`${id}-window-title`}>{meta.title}</span>
                 <div className="desktop-window-controls">
                   <button type="button" aria-label={`Minimize ${meta.title}`} onClick={() => minimizeApp(id)}>_</button>
@@ -259,6 +371,14 @@ export default function DesktopPortfolio() {
               <div className="desktop-window-body">
                 <WindowContent id={id} />
               </div>
+              <span
+                className="desktop-window-resize"
+                role="presentation"
+                onPointerDown={(e) => beginDrag(e, id, "resize")}
+                onPointerMove={onDragMove}
+                onPointerUp={endDrag}
+                onPointerCancel={endDrag}
+              />
             </section>
           );
         })}

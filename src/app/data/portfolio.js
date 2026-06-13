@@ -273,6 +273,37 @@ export const education = {
   period: "2011 — 2015",
 };
 
+export const languages = [
+  { name: "English", level: "Full professional proficiency" },
+  { name: "Urdu", level: "Native" },
+  { name: "German", level: "Working proficiency" },
+];
+
+// TODO: replace approximate metrics (~40%, ~20%, "days to hours") with real numbers before sharing
+export const experienceImpact = {
+  "Codility GmbH": [
+    "Own production reliability for a candidate assessment platform serving global traffic across two AWS regions (us-east-1, eu-central-1).",
+    "Rebuilt the alerting stack as Terraform-managed Coralogix alerts, cutting noisy pages by ~40% and codifying triage runbooks.",
+    "Drove peer-reviewed infrastructure delivery with Terraform, Terragrunt, and Atlantis, eliminating out-of-band production changes.",
+    "Hardened the CI/CD supply chain with hash-verified dependency locking after real-world package-compromise risk.",
+  ],
+  "Tradebyte Software GmbH": [
+    "Built GitLab CI delivery pipelines for a marketplace integration platform, cutting release lead time from days to hours.",
+    "Operated production Kubernetes clusters and infrastructure-as-code stacks behind major European retail integrations.",
+    "Reduced cloud spend by ~20% through rightsizing, autoscaling, and automated resource cleanup.",
+  ],
+  "Cloud9 Networks FZE": [
+    "Deployed distributed monitoring with Icinga, Elasticsearch, and Grafana across globally distributed infrastructure.",
+    "Designed highly available monitoring topologies with no single point of failure.",
+  ],
+  "Nayatel Pvt. Ltd": [
+    "Administered Linux, storage, virtualization, databases, DNS, mail, and hosting systems for a national fiber ISP.",
+    "Supported cloud infrastructure planning, vendor integrations, and 24/7 service operations.",
+  ],
+};
+
+export const cvProjects = [projects[1], projects[3], projects[0]];
+
 export const contactChannels = [
   {
     label: "Email",
