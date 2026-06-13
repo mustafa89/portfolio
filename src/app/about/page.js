@@ -1,4 +1,16 @@
-'use client'
+import Link from "next/link";
+import Navbar from "../components/navbar";
+import SafeIcon from "../components/SafeIcon";
+import {
+  capabilities,
+  contactChannels,
+  education,
+  experience,
+  locationChannel,
+  profile,
+  toolsData,
+  visualSkillGroups,
+} from "../data/portfolio";
 
 import { useState } from 'react';
 import Navbar from "../components/navbar";
@@ -357,150 +369,34 @@ export default function AboutPage() {
       <div className="absolute bottom-[-40%] left-[-5%] w-[50%] h-[80%] bg-[#8A94E5] opacity-[0.03] blur-[150px] rounded-full z-0"></div>
       
       <Navbar />
-      <main className="container mx-auto px-4 py-12 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4 animate-fade-in">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-[#ededed] tracking-tight mb-2">{personalInfo.name}</h1>
-              <p className="text-[#a9a9a9]">{personalInfo.title}</p>
+      <main id="main-content" className="mx-auto max-w-7xl px-5 pb-24 pt-14 lg:px-8">
+        <section className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start" aria-labelledby="about-title">
+          <div className="content-card lg:sticky lg:top-28">
+            <p className="kicker">About</p>
+            <h1 id="about-title" className="mt-4 text-5xl font-black tracking-[-0.07em] text-emerald-50 sm:text-6xl">
+              Builder of boring foundations for ambitious systems.
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-slate-300">{profile.positioning}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/cv" className="button-primary focus-ring">
+                Open CV
+              </Link>
+              <Link href="/projects" className="button-secondary focus-ring">
+                View Projects
+              </Link>
             </div>
-            <div className="flex gap-2">
-              <Button
-                className="flex items-center gap-2 px-4 py-2 linear-button rounded-md text-sm font-medium button-press"
-                onClick={downloadCV}
-              >
-                <ArrowDownTrayIcon className="h-5 w-5" />
-                Download CV
-              </Button>
-              <Button
-                as={Link}
-                href="/cv"
-                className="flex items-center gap-2 px-4 py-2 linear-button-secondary rounded-md text-sm font-medium button-press"
-              >
-                <Image 
-                  src="https://www.svgrepo.com/show/474950/print.svg" 
-                  alt="Print CV" 
-                  width={20} 
-                  height={20}
-                  className="text-current"
-                />
-                Print CV
-              </Button>
-            </div>
-          </div>
-          
-          <div className="glass-card rounded-lg overflow-hidden mb-8 animate-fade-in" style={{animationDelay: "0.1s"}}>
-            <div className="border-b border-[#232323] px-6 py-4">
-              <h2 className="text-lg font-semibold text-[#ededed]">Contact Information</h2>
-            </div>
-            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.keys(contactInfo).map((key, index) => {
-                const contact = contactInfo[key];
-                const staggerDelay = 0.15 + (index * 0.1);
-                return (
-                  <div key={key} className="mb-3 skill-item" style={{animationDelay: `${staggerDelay}s`}}>
-                    <div className="flex items-center gap-2 skill-logo-container">
-                      <img src={contact.logo} alt={`${contact.label} logo`} className="skill-logo" />
-                      <span className="font-medium text-[#ededed]">{contact.label}:</span> 
-                      {contact.href ? (
-                        <a href={contact.href} target="_blank" rel="noopener noreferrer" className="text-[#5E6AD2] hover:text-[#6c77d8] transition-colors">{contact.value}</a>
-                      ) : (
-                        <span className="text-[#a9a9a9]">{contact.value}</span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-            
-          <div className="glass-card rounded-lg overflow-hidden mb-8 animate-fade-in" style={{animationDelay: "0.2s"}}>
-            <div className="border-b border-[#232323] px-6 py-4">
-              <h2 className="text-lg font-semibold text-[#ededed]">Skills</h2>
-            </div>
-            <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="font-medium text-[#ededed] mb-4">{skillsData.cloudInfrastructure.title}</h3>
-                  <div className="space-y-4">
-                    {skillsData.cloudInfrastructure.skills.map((skill, i) => (
-                      <div key={skill.name} className="space-y-1 skill-item">
-                        <div className="flex justify-between items-center mb-1">
-                          <div className="flex items-center gap-2 skill-logo-container">
-                            <img src={skill.logo} alt={`${skill.name} logo`} className="skill-logo" />
-                            <span className="text-[#a9a9a9] text-sm">{skill.name}</span>
-                          </div>
-                        </div>
-                        <div className="skill-bar">
-                          <div className="skill-progress" style={{width: skill.proficiency, animationDelay: `${0.3 + (i * 0.1)}s`}}></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-medium text-[#ededed] mb-4">{skillsData.programmingTools.title}</h3>
-                  <div className="space-y-4">
-                    {skillsData.programmingTools.skills.map((skill, i) => (
-                      <div key={skill.name} className="space-y-1 skill-item">
-                        <div className="flex justify-between items-center mb-1">
-                          <div className="flex items-center gap-2 skill-logo-container">
-                            <img src={skill.logo} alt={`${skill.name} logo`} className="skill-logo" />
-                            <span className="text-[#a9a9a9] text-sm">{skill.name}</span>
-                          </div>
-                        </div>
-                        <div className="skill-bar">
-                          <div className="skill-progress" style={{width: skill.proficiency, animationDelay: `${0.3 + (i * 0.1)}s`}}></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-            
-          <div className="glass-card rounded-lg overflow-hidden mb-8 animate-fade-in" style={{animationDelay: "0.3s"}}>
-            <div className="border-b border-[#232323] px-6 py-4">
-              <h2 className="text-lg font-semibold text-[#ededed]">Tools</h2>
-            </div>
-            <div className="p-6">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                {toolsData.map((tool, i) => (
-                  <div key={tool.name} className="skill-item">
-                    <div className="flex items-center gap-2 skill-logo-container">
-                      <img src={tool.logo} alt={`${tool.name} logo`} className="skill-logo" />
-                      <span className="text-[#a9a9a9] text-sm">{tool.name}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-            
-          <div className="glass-card rounded-lg overflow-hidden mb-8 animate-fade-in" style={{animationDelay: "0.3s"}}>
-            <div className="border-b border-[#232323] px-6 py-4">
-              <h2 className="text-lg font-semibold text-[#ededed]">Experience</h2>
-            </div>
-            <div className="divide-y divide-[#232323]">
-              {experienceData.map((experience, index) => (
-                <div key={index} className="p-6 skill-item">
-                  <div className="flex flex-col md:flex-row justify-between mb-2">
-                    <div className="flex items-center gap-3 skill-logo-container">
-                      <img src={experience.logo} alt={`${experience.company} logo`} className="skill-logo" />
-                      <div>
-                        <h3 className="font-medium text-[#ededed]">{experience.title}</h3>
-                        <p className="text-[#a9a9a9]">{experience.company}</p>
-                      </div>
-                    </div>
-                    <span className="text-[#a9a9a9] text-sm mt-2 md:mt-0">{experience.period}</span>
-                  </div>
-                  <ul className="list-disc list-outside text-[#a9a9a9] ml-5 space-y-1 mt-3">
-                    {experience.responsibilities.map((responsibility, i) => (
-                      <li key={i}>{responsibility}</li>
-                    ))}
-                  </ul>
-                </div>
+            <div className="mt-8 space-y-3 text-sm text-slate-300">
+              {[...contactChannels, locationChannel].map((channel) => (
+                <a key={channel.label} href={channel.href} className="group flex min-w-0 items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4 no-underline transition-colors hover:border-emerald-300/40 hover:bg-emerald-300/[0.06] focus-ring">
+                  <span className="flex min-w-0 items-center gap-3">
+                    <SafeIcon src={channel.logo} label={channel.label} />
+                    <span className="min-w-0">
+                    <span className="block font-bold text-emerald-50">{channel.label}</span>
+                    <span className="block truncate text-slate-400">{channel.value}</span>
+                    </span>
+                  </span>
+                  {channel.href ? <span aria-hidden="true" className="text-emerald-300 transition-transform group-hover:translate-x-1">→</span> : null}
+                </a>
               ))}
             </div>
           </div>
@@ -517,8 +413,76 @@ export default function AboutPage() {
                 </div>
                 <span className="text-[#a9a9a9] text-sm">{educationData.period}</span>
               </div>
-              <p className="text-[#a9a9a9] ml-11">{educationData.institution}</p>
-            </div>
+            </section>
+
+            <section className="content-card" aria-labelledby="skills-title">
+              <p className="kicker">Skill Map</p>
+              <h2 id="skills-title" className="mt-3 text-3xl font-black tracking-[-0.05em] text-emerald-50">Visual toolbelt, restored.</h2>
+              <div className="mt-8 grid gap-7 md:grid-cols-2">
+                {visualSkillGroups.map((group) => (
+                  <article key={group.title} className="rounded-2xl border border-white/10 bg-black/15 p-5">
+                    <h3 className="font-bold text-emerald-50">{group.title}</h3>
+                    <div className="mt-5 space-y-4">
+                      {group.skills.map((skill) => (
+                        <div key={skill.name} className="skill-item">
+                          <div className="mb-2 flex items-center justify-between gap-4">
+                            <span className="flex min-w-0 items-center gap-2">
+                              <SafeIcon src={skill.logo} label={skill.name} />
+                              <span className="truncate text-sm font-semibold text-slate-200">{skill.name}</span>
+                            </span>
+                            <span className="font-mono text-xs text-emerald-200/75">{skill.proficiency}%</span>
+                          </div>
+                          <div className="skill-bar" aria-label={`${skill.name} proficiency ${skill.proficiency}%`}>
+                            <div className="skill-progress" style={{ width: `${skill.proficiency}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="content-card" aria-labelledby="tools-title">
+              <p className="kicker">Tools</p>
+              <h2 id="tools-title" className="mt-3 text-3xl font-black tracking-[-0.05em] text-emerald-50">The icon wall belongs here.</h2>
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+                {toolsData.map((tool) => (
+                  <div key={tool.name} className="tool-tile">
+                    <SafeIcon src={tool.logo} label={tool.name} />
+                    <span className="truncate text-sm font-semibold text-slate-300">{tool.name}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="content-card" aria-labelledby="experience-title">
+              <p className="kicker">Experience</p>
+              <h2 id="experience-title" className="mt-3 text-3xl font-black tracking-[-0.05em] text-emerald-50">Production scars, progressively refined.</h2>
+              <div className="mt-8 space-y-10">
+                {experience.map((item) => (
+                  <article key={`${item.company}-${item.role}`} className="timeline-item">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                      <h3 className="text-xl font-bold text-emerald-50">{item.role}</h3>
+                      <p className="font-mono text-sm text-emerald-200/75">{item.period}</p>
+                    </div>
+                    <p className="mt-1 font-semibold text-slate-300">{item.company}</p>
+                    <ul className="mt-4 space-y-2 text-slate-300">
+                      {item.focus.map((point) => (
+                        <li key={point} className="leading-7">{point}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="content-card" aria-labelledby="education-title">
+              <p className="kicker">Education</p>
+              <h2 id="education-title" className="mt-3 text-3xl font-black tracking-[-0.05em] text-emerald-50">{education.degree}</h2>
+              <p className="mt-3 text-slate-300">{education.institution}</p>
+              <p className="mt-1 font-mono text-sm text-emerald-200/75">{education.period}</p>
+            </section>
           </div>
         </div>
       </main>
