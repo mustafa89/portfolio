@@ -156,6 +156,109 @@ export const skillGroups = [
   },
 ];
 
+export const visualSkillGroups = [
+  {
+    title: "Cloud & Infrastructure",
+    skills: [
+      {
+        name: "AWS",
+        proficiency: 100,
+        logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
+      },
+      {
+        name: "Kubernetes",
+        proficiency: 90,
+        logo: "https://cdn.simpleicons.org/kubernetes",
+      },
+      {
+        name: "Docker",
+        proficiency: 90,
+        logo: "https://cdn.simpleicons.org/docker",
+      },
+      {
+        name: "Terraform",
+        proficiency: 100,
+        logo: "https://cdn.simpleicons.org/terraform",
+      },
+      {
+        name: "Infrastructure as Code",
+        proficiency: 90,
+        logo: "https://cdn.simpleicons.org/terraform",
+      },
+      {
+        name: "Observability",
+        proficiency: 100,
+        logo: "https://cdn.simpleicons.org/grafana",
+      },
+    ],
+  },
+  {
+    title: "Programming & Tools",
+    skills: [
+      {
+        name: "Python",
+        proficiency: 85,
+        logo: "https://www.vectorlogo.zone/logos/python/python-icon.svg",
+      },
+      {
+        name: "Shell",
+        proficiency: 90,
+        logo: "https://cdn.simpleicons.org/gnubash",
+      },
+      {
+        name: "JavaScript",
+        proficiency: 55,
+        logo: "https://cdn.simpleicons.org/javascript",
+      },
+      {
+        name: "CI/CD",
+        proficiency: 100,
+        logo: "https://cdn.simpleicons.org/githubactions",
+      },
+      {
+        name: "Monitoring",
+        proficiency: 100,
+        logo: "https://cdn.simpleicons.org/prometheus",
+      },
+      {
+        name: "Automation",
+        proficiency: 90,
+        logo: "https://cdn.simpleicons.org/ansible",
+      },
+    ],
+  },
+];
+
+export const toolsData = [
+  { name: "Terraform", logo: "https://cdn.simpleicons.org/terraform" },
+  { name: "Terragrunt", logo: "https://cdn.simpleicons.org/terraform" },
+  { name: "ECS Fargate", logo: "https://icon.icepanel.io/AWS/svg/Compute/Fargate.svg" },
+  { name: "EKS", logo: "https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" },
+  { name: "Ubuntu", logo: "https://cdn.simpleicons.org/ubuntu" },
+  { name: "CentOS", logo: "https://cdn.simpleicons.org/centos" },
+  { name: "Bash", logo: "https://cdn.simpleicons.org/gnubash" },
+  { name: "RDS", logo: "https://icon.icepanel.io/AWS/svg/Database/RDS.svg" },
+  { name: "PostgreSQL", logo: "https://cdn.simpleicons.org/postgresql" },
+  { name: "MySQL", logo: "https://cdn.simpleicons.org/mysql" },
+  { name: "DynamoDB", logo: "https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg" },
+  { name: "Prometheus", logo: "https://cdn.simpleicons.org/prometheus" },
+  { name: "Alertmanager", logo: "https://cdn.simpleicons.org/prometheus" },
+  { name: "Grafana", logo: "https://cdn.simpleicons.org/grafana" },
+  { name: "Kibana", logo: "https://cdn.simpleicons.org/kibana" },
+  { name: "OpenSearch", logo: "https://cdn.simpleicons.org/opensearch" },
+  { name: "OpenTelemetry", logo: "https://icon.icepanel.io/Technology/svg/OpenTelemetry.svg" },
+  { name: "Python", logo: "https://www.vectorlogo.zone/logos/python/python-icon.svg" },
+  { name: "JavaScript", logo: "https://cdn.simpleicons.org/javascript" },
+  { name: "GitLab CI", logo: "https://cdn.simpleicons.org/gitlab" },
+  { name: "Jenkins", logo: "https://cdn.simpleicons.org/jenkins" },
+  { name: "Docker", logo: "https://cdn.simpleicons.org/docker" },
+  { name: "Istio", logo: "https://cdn.simpleicons.org/istio" },
+  { name: "Argo CD", logo: "https://cdn.simpleicons.org/argo" },
+  { name: "Git", logo: "https://cdn.simpleicons.org/git" },
+  { name: "HAProxy", logo: "https://www.vectorlogo.zone/logos/haproxy/haproxy-icon.svg" },
+  { name: "PgBouncer", logo: "https://cdn.simpleicons.org/postgresql" },
+];
+
 export const principles = [
   "Question the constraint before automating around it.",
   "Reuse boring infrastructure unless isolation clearly demands new parts.",
@@ -175,18 +278,28 @@ export const contactChannels = [
     label: "Email",
     value: profile.email,
     href: `mailto:${profile.email}?subject=Hello%20Mustafa`,
+    logo: "https://www.svgrepo.com/show/485253/email-opened.svg",
     note: "Best for direct opportunities, collaboration, and thoughtful async notes.",
   },
   {
     label: "GitHub",
     value: profile.githubLabel,
     href: profile.github,
+    logo: "https://www.svgrepo.com/show/353783/github-octocat.svg",
     note: "Code, experiments, and whatever rabbit hole currently has my attention.",
   },
   {
     label: "LinkedIn",
     value: profile.linkedinLabel,
     href: profile.linkedin,
+    logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg",
     note: "Professional timeline and low-volume networking.",
   },
 ];
+
+export const locationChannel = {
+  label: "Location",
+  value: profile.location,
+  href: "https://www.google.com/maps/place/N%C3%BCrnberg,+Germany",
+  logo: "https://cdn.simpleicons.org/googlemaps",
+};

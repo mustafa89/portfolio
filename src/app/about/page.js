@@ -1,5 +1,16 @@
+import Link from "next/link";
 import Navbar from "../components/navbar";
-import { capabilities, contactChannels, education, experience, profile, skillGroups } from "../data/portfolio";
+import SafeIcon from "../components/SafeIcon";
+import {
+  capabilities,
+  contactChannels,
+  education,
+  experience,
+  locationChannel,
+  profile,
+  toolsData,
+  visualSkillGroups,
+} from "../data/portfolio";
 
 export const metadata = {
   title: "About",
@@ -18,14 +29,25 @@ export default function AboutPage() {
               Builder of boring foundations for ambitious systems.
             </h1>
             <p className="mt-6 text-lg leading-8 text-slate-300">{profile.positioning}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/cv" className="button-primary focus-ring">
+                Open CV
+              </Link>
+              <Link href="/projects" className="button-secondary focus-ring">
+                View Projects
+              </Link>
+            </div>
             <div className="mt-8 space-y-3 text-sm text-slate-300">
-              {contactChannels.map((channel) => (
+              {[...contactChannels, locationChannel].map((channel) => (
                 <a key={channel.label} href={channel.href} className="group flex min-w-0 items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4 no-underline transition-colors hover:border-emerald-300/40 hover:bg-emerald-300/[0.06] focus-ring">
-                  <span className="min-w-0">
+                  <span className="flex min-w-0 items-center gap-3">
+                    <SafeIcon src={channel.logo} label={channel.label} />
+                    <span className="min-w-0">
                     <span className="block font-bold text-emerald-50">{channel.label}</span>
                     <span className="block truncate text-slate-400">{channel.value}</span>
+                    </span>
                   </span>
-                  <span aria-hidden="true" className="text-emerald-300 transition-transform group-hover:translate-x-1">→</span>
+                  {channel.href ? <span aria-hidden="true" className="text-emerald-300 transition-transform group-hover:translate-x-1">→</span> : null}
                 </a>
               ))}
             </div>
@@ -47,18 +69,42 @@ export default function AboutPage() {
             </section>
 
             <section className="content-card" aria-labelledby="skills-title">
-              <p className="kicker">Toolbelt</p>
-              <h2 id="skills-title" className="mt-3 text-3xl font-black tracking-[-0.05em] text-emerald-50">Technologies I reach for without ceremony.</h2>
-              <div className="mt-8 grid gap-5 md:grid-cols-2">
-                {skillGroups.map((group) => (
+              <p className="kicker">Skill Map</p>
+              <h2 id="skills-title" className="mt-3 text-3xl font-black tracking-[-0.05em] text-emerald-50">Visual toolbelt, restored.</h2>
+              <div className="mt-8 grid gap-7 md:grid-cols-2">
+                {visualSkillGroups.map((group) => (
                   <article key={group.title} className="rounded-2xl border border-white/10 bg-black/15 p-5">
                     <h3 className="font-bold text-emerald-50">{group.title}</h3>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {group.items.map((item) => (
-                        <span key={item} className="chip">{item}</span>
+                    <div className="mt-5 space-y-4">
+                      {group.skills.map((skill) => (
+                        <div key={skill.name} className="skill-item">
+                          <div className="mb-2 flex items-center justify-between gap-4">
+                            <span className="flex min-w-0 items-center gap-2">
+                              <SafeIcon src={skill.logo} label={skill.name} />
+                              <span className="truncate text-sm font-semibold text-slate-200">{skill.name}</span>
+                            </span>
+                            <span className="font-mono text-xs text-emerald-200/75">{skill.proficiency}%</span>
+                          </div>
+                          <div className="skill-bar" aria-label={`${skill.name} proficiency ${skill.proficiency}%`}>
+                            <div className="skill-progress" style={{ width: `${skill.proficiency}%` }} />
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="content-card" aria-labelledby="tools-title">
+              <p className="kicker">Tools</p>
+              <h2 id="tools-title" className="mt-3 text-3xl font-black tracking-[-0.05em] text-emerald-50">The icon wall belongs here.</h2>
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+                {toolsData.map((tool) => (
+                  <div key={tool.name} className="tool-tile">
+                    <SafeIcon src={tool.logo} label={tool.name} />
+                    <span className="truncate text-sm font-semibold text-slate-300">{tool.name}</span>
+                  </div>
                 ))}
               </div>
             </section>
